@@ -1,8 +1,10 @@
 let ninja;
+let guy;
 let characters = [];
 
 function preload() {
   ninja = loadImage("media/ninja.png");
+  guy = loadImage("media/guy.png");
 }
 
 function setup() {
@@ -12,13 +14,17 @@ function setup() {
   for (let i = 0; i < 9; i++) {
     let x = random(80, width-80);
     let y = random(80, height-80);
+
+    // Randomy choose between guy and ninja sprites
+    let characterImage = random() < 0.5 ? ninja : guy;
+
     let character = new Character(x,y);
     character = new Character(random(80, width-80),random(80, height-80));
-    character.addAnimation("down", new SpriteAnimation(ninja, 6, 5, 6));
-    character.addAnimation("up", new SpriteAnimation(ninja, 0, 5, 6));
-    character.addAnimation("right", new SpriteAnimation(ninja, 1, 0, 8));
-    character.addAnimation("left", new SpriteAnimation(ninja, 1, 0, 8));
-    character.addAnimation("stand", new SpriteAnimation(ninja, 0, 0, 1));
+    character.addAnimation("down", new SpriteAnimation(characterImage, 6, 5, 6));
+    character.addAnimation("up", new SpriteAnimation(characterImage, 0, 5, 6));
+    character.addAnimation("right", new SpriteAnimation(characterImage, 1, 0, 8));
+    character.addAnimation("left", new SpriteAnimation(characterImage, 1, 0, 8));
+    character.addAnimation("stand", new SpriteAnimation(characterImage, 0, 0, 1));
     character.currentAnimation = "stand";
 
     characters.push(character);
